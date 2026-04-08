@@ -1,0 +1,120 @@
+<div class="container-fluid mt-4">
+  <div class="row">
+    <div class="col-12">
+      <div class="card">
+        <div class="card-header bg-primary text-white">
+          <div class="d-flex justify-content-between align-items-center">
+            <h4 class="mb-0">
+              <i class="bi bi-box-seam me-2"></i>
+              Gestión de Activos
+            </h4>
+            <button class="btn btn-light" routerLink="/inventario/nuevo">
+              <i class="bi bi-plus-circle me-1"></i>
+              Nuevo Activo
+            </button>
+          </div>
+        </div>
+        
+        <div class="card-body">
+          <!-- Filtros -->
+          <div class="row mb-3 g-2">
+            <div class="col-md-3">
+              <select class="form-select" [(ngModel)]="filtroCategoria" (change)="aplicarFiltros()">
+                <option value="">Todas las categorías</option>
+                <option *ngFor="let cat of categorias" [value]="cat">{{ cat }}</option>
+              </select>
+            </div>
+            <div class="col-md-3">
+              <select class="form-select" [(ngModel)]="filtroEstado" (change)="aplicarFiltros()">
+                <option value="">Todos los estados</option>
+                <option *ngFor="let est of estados" [value]="est">{{ est }}</option>
+              </select>
+            </div>
+            <div class="col-md-4">
+              <input type="text" 
+                     class="form-control" 
+                     placeholder="Buscar por ubicación..."
+                     [(ngModel)]="filtroUbicacion"
+                     (input)="aplicarFiltros()">
+            </div>
+            <div class="col-md-2">
+              <button class="btn btn-outline-secondary w-100" (click)="cargarActivos()">
+                <i class="bi bi-arrow-clockwise me-1"></i>
+                Actualizar
+              </button>
+            </div>
+          </div>
+          
+          <!-- Tabla de Activos -->
+          <div class="table-responsive">
+            <table class="table table-hover table-striped">
+              <thead class="table-dark">
+                <tr>
+                  <th>Código</th>
+                  <th>Nombre</th>
+                  <th>Categoría</th>
+                  <th>Ubicación</th>
+                  <th>Valor</th>
+                  <th>Estado</th>
+                  <th>Acciones</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngIf="loading">
+                  <td colspan="7" class="text-center py-4">
+                    <div class="spinner-border text-primary" role="status">
+                      <span class="visually-hidden">Cargando...</span>
+                    </div>
+                  </td>
+                </tr>
+                <tr *ngIf="!loading && activosFiltrados.length === 0">
+                  <td colspan="7" class="text-center py-4 text-muted">
+                    No se encontraron activos
+                  </td>
+                </tr>
+                <tr *ngFor="let activo of activosFiltrados">
+                  <td>
+                    <code>{{ activo.codigoIdentificacion }}</code>
+                  </td>
+                  <td>
+                    <strong>{{ activo.nombre }}</strong><br>
+                    <small class="text-muted">{{ activo.marca }} {{ activo.modelo }}</small>
+                  </td>
+                  <td>{{ activo.categoria }}</td>
+                  <td>{{ activo.ubicacionFisica || 'No asignada' }}</td>
+                  <td>{{ formatearMoneda(activo.valorCompra) }}</td>
+                  <td>
+                    <span [class]="getEstadoClass(activo.estado)">
+                      {{ activo.estado }}
+                    </span>
+                  </td>
+                  <td>
+                    <div class="btn-group" role="group">
+                      <button class="btn btn-sm btn-outline-primary" 
+                              [routerLink]="['/inventario', activo.id]"
+                              title="Ver detalles">
+                        <i class="bi bi-eye"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-success"
+                              (click)="descargarQR(activo.id)"
+                              title="Descargar QR">
+                        <i class="bi bi-qr-code"></i>
+                      </button>
+                      <button class="btn btn-sm btn-outline-info"
+                              [routerLink]="['/asignaciones/nueva']"
+                              [queryParams]="{activoId: activo.id}"
+                              title="Asignar"
+                              [disabled]="activo.estado !== 'DISPONIBLE'">
+                        <i class="bi bi-person-plus"></i>
+                      </button>
+                    </div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
