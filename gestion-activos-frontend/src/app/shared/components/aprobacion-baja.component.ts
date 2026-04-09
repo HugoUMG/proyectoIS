@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { BajaService } from '../../core/services/baja.service';
 import { ToastrService } from 'ngx-toastr';
-import { AprobacionBaja, Baja } from '../../shared/models/baja.model';
+import { AprobacionBaja, Baja } from '../models/baja.model';
 
 @Component({
   selector: 'app-aprobacion-baja',

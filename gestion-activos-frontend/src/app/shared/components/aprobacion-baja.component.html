@@ -1,0 +1,10 @@
+<div class="card p-3">
+  <h2>Aprobaciones pendientes</h2>
+  <ul>
+    <li *ngFor="let aprobacion of aprobacionesPendientes">
+      Baja #{{aprobacion.baja.id}} - Nivel {{aprobacion.nivelJerarquico}}
+      <button class="btn btn-success btn-sm ms-2" (click)="aprobar(aprobacion)">Aprobar</button>
+      <button class="btn btn-danger btn-sm ms-2" (click)="rechazar(aprobacion, 'Rechazada manualmente')">Rechazar</button>
+    </li>
+  </ul>
+</div>
