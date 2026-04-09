@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { InventarioService } from '../../core/services/inventario.service';
-import { Activo, EstadoActivo } from '../../shared/models/activo.model';
+import { Activo, EstadoActivo } from '../models/activo.model';
 import { ToastrService } from 'ngx-toastr';
 import { saveAs } from 'file-saver';
 

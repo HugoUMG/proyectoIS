@@ -3,8 +3,8 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { BajaService } from '../../core/services/baja.service';
 import { ActivoService } from '../../core/services/activo.service';
 import { ToastrService } from 'ngx-toastr';
-import { Activo } from '../../shared/models/activo.model';
-import { TipoBaja, MotivoBaja } from '../../shared/models/baja.model';
+import { Activo } from '../models/activo.model';
+import { TipoBaja, MotivoBaja } from '../models/baja.model';
 
 @Component({
   selector: 'app-baja-solicitud',
