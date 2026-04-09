@@ -1,0 +1,14 @@
+<div class="card p-3">
+  <h2>Solicitud de baja</h2>
+  <form [formGroup]="bajaForm" (ngSubmit)="onSubmit()">
+    <input class="form-control mb-2" formControlName="activoId" placeholder="Activo ID" />
+    <select class="form-control mb-2" formControlName="tipoBaja">
+      <option *ngFor="let tipo of tiposBaja" [value]="tipo">{{tipo}}</option>
+    </select>
+    <select class="form-control mb-2" formControlName="motivoBaja">
+      <option *ngFor="let motivo of motivosBaja" [value]="motivo">{{motivo}}</option>
+    </select>
+    <textarea class="form-control mb-2" formControlName="justificacion" placeholder="Justificación"></textarea>
+    <button class="btn btn-primary" type="submit">Enviar</button>
+  </form>
+</div>

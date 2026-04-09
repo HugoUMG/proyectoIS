@@ -1,0 +1,17 @@
+<div class="card p-3">
+  <h2>Reportes</h2>
+  <div class="mb-2">
+    <label>ID Empleado</label>
+    <input type="number" [(ngModel)]="empleadoId" class="form-control" />
+    <button class="btn btn-primary mt-2" (click)="generarHojaVidaEmpleado()">Hoja de vida</button>
+  </div>
+  <div class="mb-2">
+    <label>Fecha Inicio</label>
+    <input type="date" [(ngModel)]="fechaInicio" class="form-control" />
+    <label>Fecha Fin</label>
+    <input type="date" [(ngModel)]="fechaFin" class="form-control" />
+    <button class="btn btn-secondary mt-2" (click)="generarReporteCentroCosto()">Centro de costo</button>
+  </div>
+  <button class="btn btn-info me-2" (click)="generarReporteDepreciacion()">Depreciación</button>
+  <button class="btn btn-warning" (click)="generarReporteProximosBaja()">Próximos a baja</button>
+</div>
